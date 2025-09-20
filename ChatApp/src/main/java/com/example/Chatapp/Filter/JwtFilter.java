@@ -1,8 +1,8 @@
-package com.example.websecurity.Filter;
+package com.example.Chatapp.Filter;
 
-import com.example.websecurity.model.MyUserDetails;
-import com.example.websecurity.service.JWTService;
-import com.example.websecurity.service.MyUserDetailService;
+import com.example.Chatapp.model.MyUserDetails;
+import com.example.Chatapp.service.JWTService;
+import com.example.Chatapp.service.MyUserDetailService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

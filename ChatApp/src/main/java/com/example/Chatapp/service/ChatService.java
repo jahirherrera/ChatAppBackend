@@ -1,7 +1,7 @@
-package com.example.websecurity.service;
+package com.example.Chatapp.service;
 
-import com.example.websecurity.model.Chat;
-import com.example.websecurity.repositoty.ChatRepo;
+import com.example.Chatapp.model.Chat;
+import com.example.Chatapp.repositoty.ChatRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

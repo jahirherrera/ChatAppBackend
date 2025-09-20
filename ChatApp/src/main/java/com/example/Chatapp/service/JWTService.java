@@ -1,6 +1,6 @@
-package com.example.websecurity.service;
+package com.example.Chatapp.service;
 
-import com.example.websecurity.model.MyUserDetails;
+import com.example.Chatapp.model.MyUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

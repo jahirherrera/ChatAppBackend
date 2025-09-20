@@ -1,9 +1,9 @@
-package com.example.websecurity.controller;
+package com.example.Chatapp.controller;
 
-import com.example.websecurity.DTO.ChatDTO;
-import com.example.websecurity.model.Chat;
-import com.example.websecurity.service.ChatService;
-import com.example.websecurity.service.ServerService;
+import com.example.Chatapp.DTO.ChatDTO;
+import com.example.Chatapp.model.Chat;
+import com.example.Chatapp.service.ChatService;
+import com.example.Chatapp.service.ServerService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

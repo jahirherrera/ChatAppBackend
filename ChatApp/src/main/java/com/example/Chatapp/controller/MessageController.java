@@ -1,12 +1,12 @@
-package com.example.websecurity.controller;
+package com.example.Chatapp.controller;
 
-import com.example.websecurity.DTO.MessageDTO;
-import com.example.websecurity.model.Chat;
-import com.example.websecurity.model.Message;
-import com.example.websecurity.model.User;
-import com.example.websecurity.service.ChatService;
-import com.example.websecurity.service.MessageService;
-import com.example.websecurity.service.UserService;
+import com.example.Chatapp.DTO.MessageDTO;
+import com.example.Chatapp.model.Chat;
+import com.example.Chatapp.model.Message;
+import com.example.Chatapp.model.User;
+import com.example.Chatapp.service.ChatService;
+import com.example.Chatapp.service.MessageService;
+import com.example.Chatapp.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

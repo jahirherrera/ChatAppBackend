@@ -1,6 +1,6 @@
-package com.example.websecurity.DTO;
+package com.example.Chatapp.DTO;
 
-import com.example.websecurity.model.Message;
+import com.example.Chatapp.model.Message;
 
 public class MessageDTO {
     private int id;

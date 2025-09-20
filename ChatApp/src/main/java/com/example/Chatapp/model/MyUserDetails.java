@@ -1,6 +1,6 @@
-package com.example.websecurity.model;
+package com.example.Chatapp.model;
 
-import com.example.websecurity.model.User;
+import com.example.Chatapp.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

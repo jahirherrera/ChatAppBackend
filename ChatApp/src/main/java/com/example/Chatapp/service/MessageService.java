@@ -1,8 +1,8 @@
-package com.example.websecurity.service;
+package com.example.Chatapp.service;
 
 
-import com.example.websecurity.model.Message;
-import com.example.websecurity.repositoty.MessageRepo;
+import com.example.Chatapp.model.Message;
+import com.example.Chatapp.repositoty.MessageRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

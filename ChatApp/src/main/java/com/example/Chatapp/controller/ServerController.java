@@ -1,10 +1,10 @@
-package com.example.websecurity.controller;
+package com.example.Chatapp.controller;
 
-import com.example.websecurity.DTO.ServerDTO;
-import com.example.websecurity.model.Server;
-import com.example.websecurity.model.User;
-import com.example.websecurity.service.ServerService;
-import com.example.websecurity.service.UserService;
+import com.example.Chatapp.DTO.ServerDTO;
+import com.example.Chatapp.model.Server;
+import com.example.Chatapp.model.User;
+import com.example.Chatapp.service.ServerService;
+import com.example.Chatapp.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -32,6 +32,7 @@ public class ServerController {
         Server server = new Server();
         server.setName(serverDTO.getName());
         server.setOwner(user);
+        server.setPublic(serverDTO.isIs_Public());
 
         List<User> moderators = new ArrayList<>();
         moderators.add(user);

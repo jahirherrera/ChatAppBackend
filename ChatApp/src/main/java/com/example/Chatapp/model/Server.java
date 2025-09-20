@@ -1,4 +1,4 @@
-package com.example.websecurity.model;
+package com.example.Chatapp.model;
 
 import jakarta.persistence.*;
 
@@ -14,6 +14,8 @@ public class Server {
     private int id;
 
     private String name;
+
+    private boolean isPublic;
 
     @ManyToOne
     private User owner;
@@ -34,11 +36,20 @@ public class Server {
         this.moderators = moderators;
     }
 
-    public Server(int id, String name, User owner, List<Chat> chats, List<User> moderators) {
-        this.id = id;
+    public Server(String name, User owner, List<Chat> chats, boolean isPublic, List<User> moderators) {
         this.name = name;
         this.owner = owner;
         this.chats = chats;
+        this.isPublic = isPublic;
+        this.moderators = moderators;
+    }
+
+    public Server(int id, String name, boolean isPublic, List<Chat> chats, User owner, List<User> moderators) {
+        this.id = id;
+        this.name = name;
+        this.isPublic = isPublic;
+        this.chats = chats;
+        this.owner = owner;
         this.moderators = moderators;
     }
 
@@ -84,6 +95,14 @@ public class Server {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
     }
 
     @Override

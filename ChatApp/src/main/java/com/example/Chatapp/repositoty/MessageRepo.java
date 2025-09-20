@@ -1,6 +1,6 @@
-package com.example.websecurity.repositoty;
+package com.example.Chatapp.repositoty;
 
-import com.example.websecurity.model.Message;
+import com.example.Chatapp.model.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

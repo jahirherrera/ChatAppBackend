@@ -1,8 +1,8 @@
-package com.example.websecurity.service;
+package com.example.Chatapp.service;
 
-import com.example.websecurity.model.MyUserDetails;
-import com.example.websecurity.model.User;
-import com.example.websecurity.repositoty.UserRepo;
+import com.example.Chatapp.model.MyUserDetails;
+import com.example.Chatapp.model.User;
+import com.example.Chatapp.repositoty.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

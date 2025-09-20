@@ -1,7 +1,7 @@
-package com.example.websecurity.controller;
+package com.example.Chatapp.controller;
 
-import com.example.websecurity.model.User;
-import com.example.websecurity.service.UserService;
+import com.example.Chatapp.model.User;
+import com.example.Chatapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

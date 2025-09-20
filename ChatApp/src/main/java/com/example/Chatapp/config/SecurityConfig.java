@@ -1,6 +1,6 @@
-package com.example.websecurity.config;
+package com.example.Chatapp.config;
 
-import com.example.websecurity.Filter.JwtFilter;
+import com.example.Chatapp.Filter.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

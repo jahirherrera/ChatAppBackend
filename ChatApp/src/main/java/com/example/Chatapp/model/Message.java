@@ -1,4 +1,4 @@
-package com.example.websecurity.model;
+package com.example.Chatapp.model;
 
 import jakarta.persistence.*;
 
