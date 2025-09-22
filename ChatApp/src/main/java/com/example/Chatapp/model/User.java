@@ -1,5 +1,7 @@
 package com.example.Chatapp.model;
 
+import com.example.Chatapp.DTO.UserDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
@@ -23,6 +25,7 @@ public class User {
     private boolean isExpired;
 
     @OneToMany(mappedBy = "owner")
+    @JsonIgnore
     private List<Server> server = new ArrayList<>();
 
     @OneToMany(mappedBy = "sender")
@@ -54,6 +57,13 @@ public class User {
         this.password = password;
         this.username = username;
         this.fullname = fullname;
+    }
+
+    public User(UserDTO userDTO) {
+        this.fullname = userDTO.getFullname();
+        this.username = userDTO.getUsername();
+        this.password = userDTO.getPassword();
+        this.isExpired = userDTO.isExpired();
     }
 
     public List<Server> getServer() {

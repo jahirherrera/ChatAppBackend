@@ -1,5 +1,7 @@
 package com.example.Chatapp.service;
 
+import com.example.Chatapp.DTO.UserDTO;
+import com.example.Chatapp.model.Server;
 import com.example.Chatapp.model.User;
 import com.example.Chatapp.repositoty.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,6 +19,8 @@ import java.util.List;
 public class UserService {
 
     private final UserRepo userRepo;
+
+    private final ServerService serverService;
 
     @Autowired
     private JWTService jwtService;
@@ -26,24 +31,51 @@ public class UserService {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    public UserService(UserRepo userRepo, BCryptPasswordEncoder encoder){
+    public UserService(UserRepo userRepo, BCryptPasswordEncoder encoder, ServerService serverService){
         this.userRepo = userRepo;
         this.encoder = encoder;
+        this.serverService = serverService;
     }
 
     public User getUserByUsername(String username){
         return userRepo.getUserByUsername(username);
     }
 
-    public String addUser(User user){
+    public String addUser(UserDTO user){
         boolean exists = userRepo.existsByUsernameIgnoreCase(user.getUsername());
+
+        List<Server> serves = serverService.getAllServer().stream().filter(server -> server.getOwner().getUsername().equals("Public")).toList();
+        System.out.println("Servers found: " + serves.size());
+
+
 
         if (exists) {
             return "taken";
         }
         try {
             user.setPassword(encoder.encode(user.getPassword()));
-            userRepo.save(user);
+            User userr = new User(user);
+            userRepo.save(userr);
+
+
+
+            for (String tech : user.getTechnologies()) {
+                for (Server s : serves) {
+                    if (tech.equalsIgnoreCase(s.getName())) {
+
+                        List<User> moderators = s.getModerators();
+
+                        moderators.add(userr);
+                        s.setModerators(moderators);
+
+
+                        serverService.addServer(s);
+                    }
+                }
+            }
+
+
+
             return "added";
         }catch (Exception e){
             return "Failed to create user";

@@ -1,5 +1,6 @@
 package com.example.Chatapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class Server {
     private List<Chat> chats = new ArrayList<>();
 
     @ManyToMany
+    @JsonIgnore
     private List<User> moderators = new ArrayList<>();
 
     public Server() {
@@ -105,14 +107,5 @@ public class Server {
         isPublic = aPublic;
     }
 
-    @Override
-    public String toString() {
-        return "Server{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", owner=" + owner +
-                ", chats=" + chats +
-                ", moderators=" + moderators +
-                '}';
-    }
+
 }
