@@ -48,6 +48,11 @@ public class ServerController {
         return serverService.getAllServer();
     }
 
+    @DeleteMapping("/deleteServer/{id}")
+    public void deleteServerById(@PathVariable("id") int id){
+            serverService.deleteServerById(id);
+    }
+
     @GetMapping(path = "/serverOfUser/{username}")
     public List<ServerDTO> getAllServerOfUSer(@PathVariable("username") String username){
 

@@ -27,4 +27,8 @@ public class ServerService {
     public Server getServerById(int id){
         return serverRepo.getServerById(id);
     }
+
+    public void deleteServerById(int id){
+        serverRepo.deleteById(id);
+    }
 }
