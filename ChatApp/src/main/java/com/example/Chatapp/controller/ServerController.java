@@ -1,6 +1,7 @@
 package com.example.Chatapp.controller;
 
 import com.example.Chatapp.DTO.ServerDTO;
+import com.example.Chatapp.DTO.ServerMemberDTO;
 import com.example.Chatapp.model.Server;
 import com.example.Chatapp.model.User;
 import com.example.Chatapp.service.ServerService;
@@ -58,6 +59,16 @@ public class ServerController {
 
         return serverService.getAllServer().stream().filter(s->s.getOwner().getUsername().equals(username) || s.getModerators().stream().anyMatch(m->m.getUsername().equals(username)))
                 .map(ServerDTO::new).toList();
+    }
+
+    @PostMapping("/addUserToServer")
+    public String addUserToServer(@RequestBody ServerMemberDTO serverMemberDTO){
+        return serverService.addUserToServer(serverMemberDTO);
+    }
+
+    @PostMapping("/deleteUserFromServer")
+    public String deleteFromSever(@RequestBody ServerMemberDTO serverMemberDTO){
+        return serverService.deleteFromServer(serverMemberDTO);
     }
 }
 
