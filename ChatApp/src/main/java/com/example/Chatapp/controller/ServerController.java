@@ -44,6 +44,11 @@ public class ServerController {
 
     }
 
+    @GetMapping("/getModerators/{id}")
+    public List<User> allModerators(@PathVariable("id") int id){
+        return serverService.getAllModerators(id);
+    }
+
     @GetMapping("/getAllServer")
     public List<Server> getAllServer(){
         return serverService.getAllServer();
@@ -69,6 +74,11 @@ public class ServerController {
     @PostMapping("/deleteUserFromServer")
     public String deleteFromSever(@RequestBody ServerMemberDTO serverMemberDTO){
         return serverService.deleteFromServer(serverMemberDTO);
+    }
+
+    @PostMapping("/leavingServer")
+    public void leaveServer(@RequestBody ServerMemberDTO serverMemberDTO){
+        serverService.leaveServer(serverMemberDTO);
     }
 }
 

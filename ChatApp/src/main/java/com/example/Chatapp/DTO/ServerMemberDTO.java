@@ -8,6 +8,11 @@ public class ServerMemberDTO {
     public ServerMemberDTO() {
     }
 
+    public ServerMemberDTO(int id_server, String user) {
+        this.id_server = id_server;
+        this.user = user;
+    }
+
     public ServerMemberDTO(int id_server, String owner, String user) {
         this.id_server = id_server;
         this.owner = owner;

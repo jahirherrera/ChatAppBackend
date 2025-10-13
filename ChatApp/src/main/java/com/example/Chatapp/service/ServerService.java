@@ -38,6 +38,14 @@ public class ServerService {
         serverRepo.deleteById(id);
     }
 
+    public List<User> getAllModerators(int id){
+        try{
+            return serverRepo.getServerById(id).getModerators();
+        }catch (Exception e ){
+            throw e;
+        }
+    }
+
     public String addUserToServer(ServerMemberDTO serverMemberDTO){
         if(serverRepo.existsById(serverMemberDTO.getId_server())){
             Server server = serverRepo.getServerById(serverMemberDTO.getId_server());
@@ -78,5 +86,13 @@ public class ServerService {
         }else{
             return "Server not Found";
         }
+    }
+
+    public void leaveServer(ServerMemberDTO serverMemberDTO){
+        Server server = serverRepo.getServerById(serverMemberDTO.getId_server());
+        List<User> moderators = new ArrayList<>(server.getModerators().stream().filter(m->!m.getUsername().equals(serverMemberDTO.getUser())).toList());
+
+        server.setModerators(moderators);
+        serverRepo.save(server);
     }
 }
