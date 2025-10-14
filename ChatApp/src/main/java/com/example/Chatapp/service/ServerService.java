@@ -1,6 +1,7 @@
 package com.example.Chatapp.service;
 
 import com.example.Chatapp.DTO.ServerMemberDTO;
+import com.example.Chatapp.DTO.UserDTO;
 import com.example.Chatapp.model.Server;
 import com.example.Chatapp.model.User;
 import com.example.Chatapp.repositoty.ServerRepo;
@@ -38,12 +39,12 @@ public class ServerService {
         serverRepo.deleteById(id);
     }
 
-    public List<User> getAllModerators(int id){
-        try{
-            return serverRepo.getServerById(id).getModerators();
-        }catch (Exception e ){
-            throw e;
-        }
+    public List<UserDTO> getAllModerators(int id){
+        Server server = serverRepo.getServerById(id);
+        return server.getModerators()
+                .stream()
+                .map(UserDTO::new)
+                .collect(Collectors.toList());
     }
 
     public String addUserToServer(ServerMemberDTO serverMemberDTO){

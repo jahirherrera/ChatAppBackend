@@ -29,6 +29,7 @@ public class WebSocketController {
         this.messageService = messageService;
     }
 
+    // I need to verify is the user hasn't been removed from the server.
     @MessageMapping("/server/{serverId}/chat/{chatId}")
     public void sendMessage(
             @DestinationVariable int serverId,

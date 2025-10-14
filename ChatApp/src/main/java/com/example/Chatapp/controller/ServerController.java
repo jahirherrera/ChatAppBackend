@@ -2,6 +2,7 @@ package com.example.Chatapp.controller;
 
 import com.example.Chatapp.DTO.ServerDTO;
 import com.example.Chatapp.DTO.ServerMemberDTO;
+import com.example.Chatapp.DTO.UserDTO;
 import com.example.Chatapp.model.Server;
 import com.example.Chatapp.model.User;
 import com.example.Chatapp.service.ServerService;
@@ -45,7 +46,7 @@ public class ServerController {
     }
 
     @GetMapping("/getModerators/{id}")
-    public List<User> allModerators(@PathVariable("id") int id){
+    public List<UserDTO> allModerators(@PathVariable("id") int id){
         return serverService.getAllModerators(id);
     }
 
