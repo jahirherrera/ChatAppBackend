@@ -16,6 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String fullname;
+    private String description;
 
     @Column(unique = true)
     private String username;
@@ -31,25 +32,33 @@ public class User {
     @OneToMany(mappedBy = "sender")
     private List<Message> message;
 
+    @OneToMany(mappedBy = "toUser", cascade = CascadeType.ALL)
+    private List<Star> starsReceived;
+
+    @OneToMany(mappedBy = "fromUser", cascade = CascadeType.ALL)
+    private List<Star> starsGiven;
+
 
     public User() {
     }
 
-    public User(String username, String fullname, String password, boolean isExpired, List<Server> server) {
+    public User(String username, String fullname, String password, boolean isExpired, List<Server> server, String description) {
         this.username = username;
         this.fullname = fullname;
         this.password = password;
         this.isExpired = isExpired;
         this.server = server;
+        this.description = description;
     }
 
-    public User(int id, String fullname, String username, String password, boolean isExpired, List<Server> server) {
+    public User(int id, String fullname, String username, String password, boolean isExpired, List<Server> server, String description) {
         this.id = id;
         this.fullname = fullname;
         this.username = username;
         this.password = password;
         this.isExpired = isExpired;
         this.server = server;
+        this.description = description;
     }
 
     public User(boolean isExpired, String password, String username, String fullname) {
@@ -66,13 +75,24 @@ public class User {
         this.isExpired = userDTO.isExpired();
     }
 
+    public double getAverageStars() {
+        if(starsGiven.isEmpty()) return 0;
+
+        double total = 0;
+        for(Star star : starsReceived){
+            total += star.getAmount();
+        }
+
+        return total / starsReceived.size();
+    }
+
     public List<Server> getServer() {
         return server;
     }
 
     public void setServer(List<Server> server) {
         this.server = server;
-    }
+    } 
 
     public String getFullname() {
         return fullname;
@@ -113,6 +133,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Message> getMessage() {
+        return message;
+    }
+
+    public void setMessage(List<Message> message) {
+        this.message = message;
     }
 
     @Override

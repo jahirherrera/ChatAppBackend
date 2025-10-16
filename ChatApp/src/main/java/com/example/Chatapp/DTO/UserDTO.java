@@ -12,6 +12,7 @@ public class UserDTO {
 
     private int id;
     private String fullname;
+    private String description;
     private String username;
     private String password;
     private boolean isExpired;
@@ -25,6 +26,14 @@ public class UserDTO {
         this.username = username;
         this.password = password;
         this.isExpired = isExpired;
+    }
+
+    public UserDTO(String fullname, String username, String password, boolean isExpired, String description) {
+        this.fullname = fullname;
+        this.username = username;
+        this.password = password;
+        this.isExpired = isExpired;
+        this.description=description;
     }
 
     public UserDTO(String fullname, String username, String password, boolean isExpired, List<String> techs) {
@@ -98,6 +107,14 @@ public class UserDTO {
 
     public void setTechnologies(List<String> technologies) {
         this.technologies = technologies;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
