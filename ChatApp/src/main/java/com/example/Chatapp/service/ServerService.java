@@ -2,8 +2,12 @@ package com.example.Chatapp.service;
 
 import com.example.Chatapp.DTO.ServerMemberDTO;
 import com.example.Chatapp.DTO.UserDTO;
+import com.example.Chatapp.model.Chat;
+import com.example.Chatapp.model.Message;
 import com.example.Chatapp.model.Server;
 import com.example.Chatapp.model.User;
+import com.example.Chatapp.repositoty.ChatRepo;
+import com.example.Chatapp.repositoty.MessageRepo;
 import com.example.Chatapp.repositoty.ServerRepo;
 import com.example.Chatapp.repositoty.UserRepo;
 import org.springframework.stereotype.Service;
@@ -17,10 +21,14 @@ public class ServerService {
 
     private final ServerRepo serverRepo;
     private final UserRepo userRepo;
+    private final ChatRepo chatRepo;
+    private final MessageRepo messageRepo;
 
-    public ServerService(ServerRepo serverRepo, UserRepo userRepo) {
+    public ServerService(ServerRepo serverRepo, UserRepo userRepo, ChatRepo chatRepo, MessageRepo messageRepo) {
         this.serverRepo = serverRepo;
         this.userRepo = userRepo;
+        this.chatRepo = chatRepo;
+        this.messageRepo = messageRepo;
     }
 
     public void addServer(Server server){
@@ -36,6 +44,23 @@ public class ServerService {
     }
 
     public void deleteServerById(int id){
+        List<Message> messages = messageRepo.findAll();
+
+        for(Message message : messages){
+            if(message.getChat().getServer().getId()==id){
+                messageRepo.deleteById(message.getId());
+            }
+        }
+
+        List<Chat> chats = chatRepo.findAll();
+
+        for(Chat chat : chats){
+            if(chat.getServer().getId()==id){
+                chatRepo.deleteById(chat.getId());
+            }
+        }
+
+
         serverRepo.deleteById(id);
     }
 

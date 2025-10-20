@@ -92,5 +92,11 @@ public class UserService {
         return "failed";
     }
 
+    public UserDTO getUserProfile(String username){
+            User user = userRepo.getUserByUsername(username);
+            System.out.println(user.getAverageStars());
+            return new UserDTO(user.getUsername(),user.getFullname(),user.getDescription(),user.getAverageStars());
+    }
+
 
 }

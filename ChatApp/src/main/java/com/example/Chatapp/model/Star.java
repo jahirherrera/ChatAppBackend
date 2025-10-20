@@ -1,6 +1,7 @@
 package com.example.Chatapp.model;
 
 
+import com.example.Chatapp.DTO.StarDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,15 +10,33 @@ public class Star {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int amount;
+    private int amount; //1-5
 
     @ManyToOne
     @JoinColumn(name = "from_user_id", nullable = false)
-    private User fromUser;
+    private User fromUser; //Jahir
 
     @ManyToOne
     @JoinColumn(name = "to_user_id", nullable = false)
-    private User toUser;
+    private User toUser; //viper
+
+    public Star() {
+    }
+
+    public Star(int amount, User fromUser, User toUser) {
+        this.amount = amount;
+        this.fromUser = fromUser;
+        this.toUser = toUser;
+    }
+
+    public Star(int id, int amount, User toUser, User fromUser) {
+        this.id = id;
+        this.amount = amount;
+        this.toUser = toUser;
+        this.fromUser = fromUser;
+    }
+
+
 
 
     public int getId() {
@@ -51,4 +70,5 @@ public class Star {
     public void setFromUser(User fromUser) {
         this.fromUser = fromUser;
     }
+
 }

@@ -17,8 +17,16 @@ public class UserDTO {
     private String password;
     private boolean isExpired;
     private List<String> technologies;
+    private double starsGiven;
 
     public UserDTO() {
+    }
+
+    public UserDTO(String username,String fullname, String description,  double starsGiven) {
+        this.username = username;
+        this.fullname = fullname;
+        this.description = description;
+        this.starsGiven = starsGiven;
     }
 
     public UserDTO(String fullname, String username, String password, boolean isExpired) {
@@ -59,6 +67,14 @@ public class UserDTO {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.isExpired = user.isExpired();
+    }
+
+    public double getStarsGiven() {
+        return starsGiven;
+    }
+
+    public void setStarsGiven(double starsGiven) {
+        this.starsGiven = starsGiven;
     }
 
     public int getId() {

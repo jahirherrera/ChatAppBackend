@@ -41,6 +41,12 @@ public class UserController {
         }
     }
 
+    @GetMapping("/getUserProfile/{username}")
+    public UserDTO getUserProfile(@PathVariable("username") String username ){
+
+        return userService.getUserProfile(username);
+    }
+
     @GetMapping("/hello")
     public String getGreeting(){
         return "Hello and welcome to your homepage";

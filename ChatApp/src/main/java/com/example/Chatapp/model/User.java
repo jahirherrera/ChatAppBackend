@@ -76,12 +76,16 @@ public class User {
     }
 
     public double getAverageStars() {
-        if(starsGiven.isEmpty()) return 0;
+        if (starsReceived.isEmpty()) return 0;
 
         double total = 0;
-        for(Star star : starsReceived){
+        for (Star star : starsReceived) {
             total += star.getAmount();
         }
+
+        System.out.println(total);
+        System.out.println(starsReceived.size());
+        System.out.println(total / starsReceived.size());
 
         return total / starsReceived.size();
     }
@@ -92,7 +96,7 @@ public class User {
 
     public void setServer(List<Server> server) {
         this.server = server;
-    } 
+    }
 
     public String getFullname() {
         return fullname;
@@ -149,6 +153,22 @@ public class User {
 
     public void setMessage(List<Message> message) {
         this.message = message;
+    }
+
+    public List<Star> getStarsReceived() {
+        return starsReceived;
+    }
+
+    public void setStarsReceived(List<Star> starsReceived) {
+        this.starsReceived = starsReceived;
+    }
+
+    public List<Star> getStarsGiven() {
+        return starsGiven;
+    }
+
+    public void setStarsGiven(List<Star> starsGiven) {
+        this.starsGiven = starsGiven;
     }
 
     @Override
