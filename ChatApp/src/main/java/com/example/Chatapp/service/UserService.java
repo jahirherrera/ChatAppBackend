@@ -45,7 +45,6 @@ public class UserService {
         boolean exists = userRepo.existsByUsernameIgnoreCase(user.getUsername());
 
         List<Server> serves = serverService.getAllServer().stream().filter(server -> server.getOwner().getUsername().equals("Public")).toList();
-        System.out.println("Servers found: " + serves.size());
 
 
 
@@ -94,7 +93,6 @@ public class UserService {
 
     public UserDTO getUserProfile(String username){
             User user = userRepo.getUserByUsername(username);
-            System.out.println(user.getAverageStars());
             return new UserDTO(user.getUsername(),user.getFullname(),user.getDescription(),user.getAverageStars());
     }
 

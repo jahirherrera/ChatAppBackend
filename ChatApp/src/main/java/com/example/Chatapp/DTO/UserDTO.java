@@ -16,6 +16,7 @@ public class UserDTO {
     private String username;
     private String password;
     private boolean isExpired;
+    private String email;
     private List<String> technologies;
     private double starsGiven;
 
@@ -36,28 +37,22 @@ public class UserDTO {
         this.isExpired = isExpired;
     }
 
-    public UserDTO(String fullname, String username, String password, boolean isExpired, String description) {
+    public UserDTO(String fullname, String username, String password, boolean isExpired, String description, String Email) {
         this.fullname = fullname;
         this.username = username;
         this.password = password;
         this.isExpired = isExpired;
+        this.email = Email;
         this.description=description;
     }
 
-    public UserDTO(String fullname, String username, String password, boolean isExpired, List<String> techs) {
+    public UserDTO(String fullname, String username, String password, boolean isExpired, List<String> techs, String email, String description) {
         this.fullname = fullname;
         this.username = username;
         this.password = password;
         this.isExpired = isExpired;
-        this.technologies = techs;
-    }
-
-    public UserDTO(int id, String fullname, String username, String password, boolean isExpired, List<String> techs) {
-        this.id = id;
-        this.fullname = fullname;
-        this.username = username;
-        this.password = password;
-        this.isExpired = isExpired;
+        this.email = email;
+        this.description = description;
         this.technologies = techs;
     }
 
@@ -67,6 +62,8 @@ public class UserDTO {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.isExpired = user.isExpired();
+        this.email = user.getEmail();
+        this.description = user.getDescription();
     }
 
     public double getStarsGiven() {
@@ -131,6 +128,14 @@ public class UserDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

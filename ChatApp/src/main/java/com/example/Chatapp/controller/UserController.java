@@ -24,6 +24,7 @@ public class UserController {
 
     @PostMapping("/addUser")
     public String addUser(@RequestBody UserDTO user){
+        System.out.println(user.getDescription());
        return userService.addUser(user);
     }
 

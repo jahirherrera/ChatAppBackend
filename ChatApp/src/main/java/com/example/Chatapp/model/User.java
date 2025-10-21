@@ -25,6 +25,8 @@ public class User {
     @Column(name = "isExpired")
     private boolean isExpired;
 
+    private String email;
+
     @OneToMany(mappedBy = "owner")
     @JsonIgnore
     private List<Server> server = new ArrayList<>();
@@ -42,12 +44,13 @@ public class User {
     public User() {
     }
 
-    public User(String username, String fullname, String password, boolean isExpired, List<Server> server, String description) {
+    public User(String username, String fullname, String password, boolean isExpired, List<Server> server, String description, String email) {
         this.username = username;
         this.fullname = fullname;
         this.password = password;
         this.isExpired = isExpired;
         this.server = server;
+        this.email = email;
         this.description = description;
     }
 
@@ -73,6 +76,8 @@ public class User {
         this.username = userDTO.getUsername();
         this.password = userDTO.getPassword();
         this.isExpired = userDTO.isExpired();
+        this.email = userDTO.getEmail();
+        this.description = userDTO.getDescription();
     }
 
     public double getAverageStars() {
@@ -169,6 +174,14 @@ public class User {
 
     public void setStarsGiven(List<Star> starsGiven) {
         this.starsGiven = starsGiven;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
