@@ -50,6 +50,11 @@ public class ServerController {
         return serverService.getAllModerators(id);
     }
 
+    @GetMapping("/serverInfo/{id}")
+    public ServerDTO getServerInfo(@PathVariable("id") int id){
+        return serverService.getServerInfo(id);
+    }
+
     @GetMapping("/getAllServer")
     public List<Server> getAllServer(){
         return serverService.getAllServer();

@@ -1,5 +1,6 @@
 package com.example.Chatapp.service;
 
+import com.example.Chatapp.DTO.ServerDTO;
 import com.example.Chatapp.DTO.ServerMemberDTO;
 import com.example.Chatapp.DTO.UserDTO;
 import com.example.Chatapp.model.Chat;
@@ -120,5 +121,16 @@ public class ServerService {
 
         server.setModerators(moderators);
         serverRepo.save(server);
+    }
+
+    public ServerDTO getServerInfo(int id){
+        try{
+            Server server = serverRepo.getServerById(id);
+
+            return new ServerDTO(server.getName(), server.getOwner().getUsername(), server.isPublic(), server.getNumberModerators());
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

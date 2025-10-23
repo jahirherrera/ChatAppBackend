@@ -7,10 +7,12 @@ public class ServerDTO {
     private String name;
     private String ownerUsername;
     private boolean is_Public;
+    private int numberModerators;
 
 
     public ServerDTO() {
     }
+
 
 
     public ServerDTO(String name, String ownerUsername) {
@@ -30,6 +32,13 @@ public class ServerDTO {
         this.ownerUsername = server.getOwner().getUsername();
         this.name = server.getName();
         this.is_Public = server.isPublic();
+    }
+
+    public ServerDTO(String name, String ownerUsername, boolean is_Public, int numberModerators) {
+        this.name = name;
+        this.ownerUsername = ownerUsername;
+        this.is_Public = is_Public;
+        this.numberModerators = numberModerators;
     }
 
 
@@ -63,5 +72,13 @@ public class ServerDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getNumberModerators() {
+        return numberModerators;
+    }
+
+    public void setNumberModerators(int numberModerators) {
+        this.numberModerators = numberModerators;
     }
 }

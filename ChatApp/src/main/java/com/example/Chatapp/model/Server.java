@@ -55,6 +55,10 @@ public class Server {
         this.moderators = moderators;
     }
 
+    public int getNumberModerators(){
+        return moderators.size();
+    }
+
     public Server(String name) {
         this.name = name;
     }

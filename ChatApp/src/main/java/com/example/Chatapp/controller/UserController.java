@@ -24,7 +24,6 @@ public class UserController {
 
     @PostMapping("/addUser")
     public String addUser(@RequestBody UserDTO user){
-        System.out.println(user.getDescription());
        return userService.addUser(user);
     }
 
@@ -41,6 +40,12 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
+
+    @GetMapping("/getUserOptions/{username}")
+    public UserDTO getUserOpts(@PathVariable("username") String username){
+        return userService.getUserOpts(username);
+    }
+
 
     @GetMapping("/getUserProfile/{username}")
     public UserDTO getUserProfile(@PathVariable("username") String username ){

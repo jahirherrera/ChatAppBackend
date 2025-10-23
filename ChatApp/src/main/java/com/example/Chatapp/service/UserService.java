@@ -49,7 +49,7 @@ public class UserService {
 
 
         if (exists) {
-            return "taken";
+            return "Username taken, choose another one";
         }
         try {
             user.setPassword(encoder.encode(user.getPassword()));
@@ -89,6 +89,12 @@ public class UserService {
             return jwtService.generateToken(user.getUsername());
         }
         return "failed";
+    }
+
+    public UserDTO getUserOpts(String username){
+        User user = userRepo.getUserByUsername(username);
+
+        return new UserDTO(user);
     }
 
     public UserDTO getUserProfile(String username){
