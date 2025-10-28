@@ -4,6 +4,7 @@ import com.example.Chatapp.DTO.UserDTO;
 import com.example.Chatapp.model.User;
 import com.example.Chatapp.service.ServerService;
 import com.example.Chatapp.service.UserService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +29,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user){
-        return userService.verify(user);
+    public String login(@RequestBody User user, HttpServletResponse response){
+        return userService.verify(user, response);
     }
 
     @GetMapping("/getUser")

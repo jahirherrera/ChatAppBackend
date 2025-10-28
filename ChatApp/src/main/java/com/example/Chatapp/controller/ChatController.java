@@ -4,6 +4,7 @@ import com.example.Chatapp.DTO.ChatDTO;
 import com.example.Chatapp.model.Chat;
 import com.example.Chatapp.service.ChatService;
 import com.example.Chatapp.service.ServerService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,8 +35,10 @@ public class ChatController {
         return chatService.getAllChat();
     }
 
-    @GetMapping(path = "/chats/{username}")
-    public List<ChatDTO> chatByUsername(@PathVariable String username){
+    @GetMapping(path = "/chats")
+    public List<ChatDTO> chatByUsername(){
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
         return chatService.getAllChat().stream().filter(c->c.getServer().getModerators().stream().anyMatch(m->m.getUsername().equals(username))).map(ChatDTO::new).toList();
 

@@ -7,6 +7,7 @@ import com.example.Chatapp.model.Server;
 import com.example.Chatapp.model.User;
 import com.example.Chatapp.service.ServerService;
 import com.example.Chatapp.service.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -65,8 +66,10 @@ public class ServerController {
             serverService.deleteServerById(id);
     }
 
-    @GetMapping(path = "/serverOfUser/{username}")
-    public List<ServerDTO> getAllServerOfUSer(@PathVariable("username") String username){
+    @GetMapping(path = "/serverOfUser")
+    public List<ServerDTO> getAllServerOfUSer(){
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
         return serverService.getAllServer().stream().filter(s->s.getOwner().getUsername().equals(username) || s.getModerators().stream().anyMatch(m->m.getUsername().equals(username)))
                 .map(ServerDTO::new).toList();

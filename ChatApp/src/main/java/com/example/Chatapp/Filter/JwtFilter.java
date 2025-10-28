@@ -5,6 +5,7 @@ import com.example.Chatapp.service.JWTService;
 import com.example.Chatapp.service.MyUserDetailService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.jetbrains.annotations.NotNull;
@@ -30,22 +31,31 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(@NotNull HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String autHeader = request.getHeader("Authorization");
         String token = null;
         String username = null;
 
+        Cookie[] cookies = request.getCookies();
 
-
-
-
-        try {
-            if (autHeader != null && autHeader.startsWith("Bearer ")) {
-                token = autHeader.substring(7);
-                username = jwtService.extractUsername(token);
+        if (cookies != null){
+            try{
+                for(Cookie cookie : cookies){
+                    if("token".equals(cookie.getName())){
+                        token = cookie.getValue();
+                        username = jwtService.extractUsername(token);
+                        break;
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("invalid token" + e.getMessage());
             }
-        }catch (Exception e) {
-            System.out.println("Invalid token: " + e.getMessage());
+
         }
+
+
+
+
+
+
 
 
 
