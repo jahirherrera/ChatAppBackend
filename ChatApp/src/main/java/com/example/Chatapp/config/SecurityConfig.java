@@ -47,7 +47,7 @@ public class SecurityConfig {
                         .permitAll()
                         .anyRequest().authenticated()) //we set that every request must be autheticated
                 //.formLogin(Customizer.withDefaults())   //we enable the default login of spring security
-                .httpBasic(Customizer.withDefaults())
+                //.httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build(); //enable the http basic authentication using the default settings

@@ -34,7 +34,6 @@ public class MessageDTO {
         this.content = message.getContent();
         this.chat_id = message.getChat().getId();
         this.id = message.getId();
-        this.sender_id= message.getSender().getId();
         this.sender_username = message.getSender().getUsername();
         this.date = message.getDate();
     }

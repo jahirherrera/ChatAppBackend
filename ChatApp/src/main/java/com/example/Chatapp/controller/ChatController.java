@@ -38,9 +38,7 @@ public class ChatController {
     @GetMapping(path = "/chats")
     public List<ChatDTO> chatByUsername(){
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-
-        return chatService.getAllChat().stream().filter(c->c.getServer().getModerators().stream().anyMatch(m->m.getUsername().equals(username))).map(ChatDTO::new).toList();
+        return chatService.chatByUsername();
 
     }
 }

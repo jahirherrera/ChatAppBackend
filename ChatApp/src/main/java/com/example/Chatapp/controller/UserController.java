@@ -4,6 +4,7 @@ import com.example.Chatapp.DTO.UserDTO;
 import com.example.Chatapp.model.User;
 import com.example.Chatapp.service.ServerService;
 import com.example.Chatapp.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,9 +43,9 @@ public class UserController {
         }
     }
 
-    @GetMapping("/getUserOptions/{username}")
-    public UserDTO getUserOpts(@PathVariable("username") String username){
-        return userService.getUserOpts(username);
+    @GetMapping("/getUserOptions")
+    public UserDTO getUserOpts(){
+        return userService.getUserOpts();
     }
 
 

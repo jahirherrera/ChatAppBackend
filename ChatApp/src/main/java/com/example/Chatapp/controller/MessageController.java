@@ -7,6 +7,7 @@ import com.example.Chatapp.model.User;
 import com.example.Chatapp.service.ChatService;
 import com.example.Chatapp.service.MessageService;
 import com.example.Chatapp.service.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,24 +29,13 @@ public class MessageController {
     @PostMapping("/saveMessage")
     public MessageDTO saveMessage(@RequestBody MessageDTO m){
 
-        User sender = userService.getUserByUsername(m.getSender_username());
-        Chat chat = chatService.finChatById(m.getChat_id());
-
-        Message message = new Message();
-        message.setContent(m.getContent());
-        message.setSender(sender);
-        message.setChat(chat);
-        message.setDate(m.getDate());
-
-        Message saved = messageService.saveMessage(message);
-
-        return new MessageDTO(saved);
+        return messageService.saveMessage(m);
     }
 
     @GetMapping(path = "/messages/{chatid}")
     public List<MessageDTO> getAllMessageChat(@PathVariable int chatid){
 
-        return messageService.getAllMessages().stream().filter(m -> m.getChat().getId() == chatid).map(MessageDTO::new).toList();
+        return messageService.getAllMessagesChat(chatid);
     }
 
 }

@@ -1,9 +1,11 @@
 package com.example.Chatapp.service;
 
+import com.example.Chatapp.DTO.ChatDTO;
 import com.example.Chatapp.model.Chat;
 import com.example.Chatapp.repositoty.ChatRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.function.EntityResponse;
 
@@ -28,5 +30,11 @@ public class ChatService {
 
     public List<Chat> getAllChat(){
         return chatRepo.findAll();
+    }
+
+    public List<ChatDTO> chatByUsername(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        return chatRepo.getAllChatsByUsername(username).stream().map(ChatDTO::new).toList();
     }
 }

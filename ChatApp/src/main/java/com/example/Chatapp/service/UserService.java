@@ -5,15 +5,18 @@ import com.example.Chatapp.model.Server;
 import com.example.Chatapp.model.User;
 import com.example.Chatapp.repositoty.UserRepo;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -91,7 +94,7 @@ public class UserService {
 
             Cookie cookie = new Cookie("token", jwtService.generateToken(user.getUsername()));
 
-            cookie.setSecure(false); //HTTP is allowed
+            cookie.setSecure(true); //HTTP is allowed
             cookie.setHttpOnly(true); // frontend cant read or modify it
             cookie.setMaxAge(60 * 60 * 24); //expiration time (1day)
             cookie.setPath("/"); //send all to endpoints
@@ -105,7 +108,10 @@ public class UserService {
         return "failed";
     }
 
-    public UserDTO getUserOpts(String username){
+    public UserDTO getUserOpts(){
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
         User user = userRepo.getUserByUsername(username);
 
         return new UserDTO(user);
