@@ -11,6 +11,7 @@ import com.example.Chatapp.repositoty.ChatRepo;
 import com.example.Chatapp.repositoty.MessageRepo;
 import com.example.Chatapp.repositoty.ServerRepo;
 import com.example.Chatapp.repositoty.UserRepo;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -73,10 +74,33 @@ public class ServerService {
                 .collect(Collectors.toList());
     }
 
+    public String addingItself(ServerMemberDTO serverMemberDTO){
+        Server server = serverRepo.getServerById(serverMemberDTO.getId_server());
+        if(!server.isPublic()) return "Server is not public";
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepo.getUserByUsername(username);
+
+        List<User> moderators = server.getModerators();
+        moderators.add(user);
+        server.setModerators(moderators);
+        serverRepo.save(server);
+        return "Added";
+    }
+
+    public List<ServerDTO> allServerWith(String name){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        return serverRepo.getAllServersNoUserWith(username,name).stream().map(ServerDTO::new).toList();
+    }
+
     public String addUserToServer(ServerMemberDTO serverMemberDTO){
-        if(serverRepo.existsById(serverMemberDTO.getId_server())){
+        User user = userRepo.getUserByUsername(serverMemberDTO.getUser());
+
+        if(serverRepo.existsById(serverMemberDTO.getId_server()) && user!=null){
             Server server = serverRepo.getServerById(serverMemberDTO.getId_server());
             if(server.getOwner().getUsername().equals(serverMemberDTO.getOwner())){
+
                     User newuser = userRepo.getUserByUsername(serverMemberDTO.getUser());
                     List<User> moderators = server.getModerators();
 
@@ -84,19 +108,20 @@ public class ServerService {
                     server.setModerators(moderators);
 
                     serverRepo.save(server);
-                    return "User added to the server";
+                    return "User added";
 
             }else{
                 return "You are not the owner of the server";
             }
         }else{
-            return "Server not Found";
+            return "Server/User not Found";
         }
 
     }
 
     public String deleteFromServer(ServerMemberDTO serverMemberDTO){
-        if(serverRepo.existsById(serverMemberDTO.getId_server())){
+        User user = userRepo.getUserByUsername(serverMemberDTO.getUser());
+        if(serverRepo.existsById(serverMemberDTO.getId_server()) && user!= null){
             Server server = serverRepo.getServerById(serverMemberDTO.getId_server());
             if(server.getOwner().getUsername().equals(serverMemberDTO.getOwner())){
 
@@ -111,7 +136,7 @@ public class ServerService {
                 return "You are not the owner of the server";
             }
         }else{
-            return "Server not Found";
+            return "Server/user not Found";
         }
     }
 
@@ -132,5 +157,11 @@ public class ServerService {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public List<ServerDTO> getAllNoUsername(){
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return serverRepo.getAllServersNoUser(username).stream().map(ServerDTO::new).toList();
     }
 }

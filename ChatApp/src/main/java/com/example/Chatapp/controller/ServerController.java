@@ -25,6 +25,11 @@ public class ServerController {
         this.userService = userService;
     }
 
+    @GetMapping("/getAllServersNoUsername")
+    public List<ServerDTO> getAll(){
+        return serverService.getAllNoUsername();
+    }
+
     @PostMapping("/addServer")
     public void addServer(@RequestBody ServerDTO serverDTO){
 
@@ -54,6 +59,16 @@ public class ServerController {
     @GetMapping("/serverInfo/{id}")
     public ServerDTO getServerInfo(@PathVariable("id") int id){
         return serverService.getServerInfo(id);
+    }
+
+    @PostMapping("/addingItself")
+    public String addingItself(@RequestBody ServerMemberDTO serverMemberDTO){
+        return serverService.addingItself(serverMemberDTO);
+    }
+
+    @GetMapping("/allServerIncludes/{name}")
+    public List<ServerDTO> allServerWith(@PathVariable("name") String name){
+        return serverService.allServerWith(name);
     }
 
     @GetMapping("/getAllServer")

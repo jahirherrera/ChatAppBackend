@@ -8,6 +8,10 @@ public class ServerMemberDTO {
     public ServerMemberDTO() {
     }
 
+    public ServerMemberDTO(int id_server) {
+        this.id_server = id_server;
+    }
+
     public ServerMemberDTO(int id_server, String user) {
         this.id_server = id_server;
         this.user = user;
@@ -41,5 +45,14 @@ public class ServerMemberDTO {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "ServerMemberDTO{" +
+                "id_server=" + id_server +
+                ", owner='" + owner + '\'' +
+                ", user='" + user + '\'' +
+                '}';
     }
 }

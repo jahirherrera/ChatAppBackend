@@ -36,6 +36,9 @@ public class SecurityConfig {
     @Autowired
     public JwtFilter jwtFilter;
 
+    @Autowired
+    OnSuccess onSuccess;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { //we return the filter chain with the type httpsecurity
 
@@ -48,6 +51,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()) //we set that every request must be autheticated
                 //.formLogin(Customizer.withDefaults())   //we enable the default login of spring security
                 //.httpBasic(Customizer.withDefaults())
+                .oauth2Login(oauth -> oauth.successHandler(onSuccess))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build(); //enable the http basic authentication using the default settings

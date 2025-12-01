@@ -13,7 +13,9 @@ public class ServerDTO {
     public ServerDTO() {
     }
 
-
+    public ServerDTO(String name) {
+        this.name = name;
+    }
 
     public ServerDTO(String name, String ownerUsername) {
         this.name = name;

@@ -71,6 +71,14 @@ public class User {
         this.fullname = fullname;
     }
 
+    public User(boolean isExpired, String password, String username, String fullname, String email) {
+        this.isExpired = isExpired;
+        this.password = password;
+        this.username = username;
+        this.fullname = fullname;
+        this.email = email;
+    }
+
     public User(UserDTO userDTO) {
         this.fullname = userDTO.getFullname();
         this.username = userDTO.getUsername();
