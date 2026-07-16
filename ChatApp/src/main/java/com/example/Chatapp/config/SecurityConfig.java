@@ -46,7 +46,7 @@ public class SecurityConfig {
         return http
                 .csrf(customizer -> customizer.disable())//we disable the csrf
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(request -> request.requestMatchers("/addUser","/login","/ws/**")
+                .authorizeHttpRequests(request -> request.requestMatchers("/addUser","/login","/ws/**","/gi")
                         .permitAll()
                         .anyRequest().authenticated()) //we set that every request must be autheticated
                 //.formLogin(Customizer.withDefaults())   //we enable the default login of spring security

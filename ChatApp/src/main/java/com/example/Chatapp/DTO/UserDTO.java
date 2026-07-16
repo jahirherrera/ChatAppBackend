@@ -18,12 +18,17 @@ public class UserDTO {
     private boolean isExpired;
     private String email;
     private List<String> technologies;
-    private double starsGiven;
+    private int starsGiven;
 
     public UserDTO() {
     }
 
-    public UserDTO(String username,String fullname, String description,  double starsGiven) {
+    public UserDTO(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public UserDTO(String username, String fullname, String description, int starsGiven) {
         this.username = username;
         this.fullname = fullname;
         this.description = description;
@@ -70,7 +75,7 @@ public class UserDTO {
         return starsGiven;
     }
 
-    public void setStarsGiven(double starsGiven) {
+    public void setStarsGiven(int starsGiven) {
         this.starsGiven = starsGiven;
     }
 

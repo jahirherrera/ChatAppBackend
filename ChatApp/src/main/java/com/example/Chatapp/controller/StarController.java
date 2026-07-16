@@ -2,9 +2,9 @@ package com.example.Chatapp.controller;
 
 import com.example.Chatapp.DTO.StarDTO;
 import com.example.Chatapp.service.StarService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class StarController {
@@ -18,6 +18,11 @@ public class StarController {
     @PostMapping("/giveStars")
     public void starsGiven(@RequestBody  StarDTO starDTO){
         starService.starsGiven(starDTO);
+    }
+
+    @GetMapping("/getStars/{username}")
+    public List<StarDTO> getStarsFromUser(@PathVariable("username") String username){
+        return starService.getStarsFromUser(username);
     }
 
 }

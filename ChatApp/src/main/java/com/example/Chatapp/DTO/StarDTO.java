@@ -1,5 +1,7 @@
 package com.example.Chatapp.DTO;
 
+import com.example.Chatapp.model.Star;
+
 public class StarDTO {
 
     private int amount;
@@ -13,6 +15,12 @@ public class StarDTO {
         this.amount = amount;
         this.usernameFrom = usernameFrom;
         this.usernameTo = usernameTo;
+    }
+
+    public StarDTO(Star star){
+        this.amount = star.getAmount();
+        this.usernameFrom = star.getFromUser().getUsername();
+        this.usernameTo = star.getToUser().getUsername();
     }
 
     public int getAmount() {
@@ -39,5 +47,12 @@ public class StarDTO {
         this.usernameTo = usernameTo;
     }
 
-
+    @Override
+    public String toString() {
+        return "StarDTO{" +
+                "amount=" + amount +
+                ", usernameFrom='" + usernameFrom + '\'' +
+                ", usernameTo='" + usernameTo + '\'' +
+                '}';
+    }
 }

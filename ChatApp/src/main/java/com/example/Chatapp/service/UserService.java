@@ -122,5 +122,18 @@ public class UserService {
             return new UserDTO(user.getUsername(),user.getFullname(),user.getDescription(),user.getAverageStars());
     }
 
+    public String changePassword(UserDTO userDTO){
+        User user = userRepo.getUserByUsername(userDTO.getUsername());
+
+        if(user==null){
+            return "user not found";
+        }
+        String passwordEncode = encoder.encode(userDTO.getPassword());
+        user.setPassword(passwordEncode);
+
+        userRepo.save(user);
+
+        return "succefull";
+    }
 
 }

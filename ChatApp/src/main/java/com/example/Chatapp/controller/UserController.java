@@ -43,6 +43,11 @@ public class UserController {
         }
     }
 
+    @PostMapping("/changePassword")
+    public String changeUserPassword(@RequestBody UserDTO userDTO){
+        return userService.changePassword(userDTO);
+    }
+
     @GetMapping("/getUserOptions")
     public UserDTO getUserOpts(){
         return userService.getUserOpts();
@@ -55,8 +60,4 @@ public class UserController {
         return userService.getUserProfile(username);
     }
 
-    @GetMapping("/hello")
-    public String getGreeting(){
-        return "Hello and welcome to your homepage";
-    }
 }

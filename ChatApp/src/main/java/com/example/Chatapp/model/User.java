@@ -88,7 +88,7 @@ public class User {
         this.description = userDTO.getDescription();
     }
 
-    public double getAverageStars() {
+    public int getAverageStars() {
         if (starsReceived.isEmpty()) return 0;
 
         double total = 0;
@@ -96,11 +96,10 @@ public class User {
             total += star.getAmount();
         }
 
-        System.out.println(total);
-        System.out.println(starsReceived.size());
-        System.out.println(total / starsReceived.size());
+        double truncable = total / starsReceived.size();
+        int totalCalculated = (int) Math.round(truncable);
 
-        return total / starsReceived.size();
+        return totalCalculated;
     }
 
     public List<Server> getServer() {
