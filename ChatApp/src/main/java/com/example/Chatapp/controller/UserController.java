@@ -43,6 +43,11 @@ public class UserController {
         }
     }
 
+    @PostMapping("/updateInfo")
+    public void updatingInfo(@RequestBody UserDTO userDTO){
+        userService.updatingInfo(userDTO);
+    }
+
     @PostMapping("/changePassword")
     public String changeUserPassword(@RequestBody UserDTO userDTO){
         return userService.changePassword(userDTO);

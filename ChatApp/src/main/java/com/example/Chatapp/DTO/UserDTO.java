@@ -19,6 +19,7 @@ public class UserDTO {
     private String email;
     private List<String> technologies;
     private int starsGiven;
+    private String urlImage;
 
     public UserDTO() {
     }
@@ -51,6 +52,16 @@ public class UserDTO {
         this.description=description;
     }
 
+    public UserDTO(String fullname, String description, String username, String password, boolean isExpired, String email, String urlImage) {
+        this.fullname = fullname;
+        this.description = description;
+        this.username = username;
+        this.password = password;
+        this.isExpired = isExpired;
+        this.email = email;
+        this.urlImage = urlImage;
+    }
+
     public UserDTO(String fullname, String username, String password, boolean isExpired, List<String> techs, String email, String description) {
         this.fullname = fullname;
         this.username = username;
@@ -65,10 +76,10 @@ public class UserDTO {
         this.id = user.getId();
         this.fullname = user.getFullname();
         this.username = user.getUsername();
-        this.password = user.getPassword();
         this.isExpired = user.isExpired();
         this.email = user.getEmail();
         this.description = user.getDescription();
+        this.urlImage = user.getUrlImage();
     }
 
     public double getStarsGiven() {
@@ -141,6 +152,14 @@ public class UserDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 
     @Override

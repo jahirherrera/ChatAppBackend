@@ -25,6 +25,9 @@ public class User {
     @Column(name = "isExpired")
     private boolean isExpired;
 
+    private String urlImage;
+
+
     private String email;
 
     @OneToMany(mappedBy = "owner")
@@ -79,6 +82,8 @@ public class User {
         this.email = email;
     }
 
+
+
     public User(UserDTO userDTO) {
         this.fullname = userDTO.getFullname();
         this.username = userDTO.getUsername();
@@ -87,6 +92,8 @@ public class User {
         this.email = userDTO.getEmail();
         this.description = userDTO.getDescription();
     }
+
+
 
     public int getAverageStars() {
         if (starsReceived.isEmpty()) return 0;
@@ -189,6 +196,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 
     @Override

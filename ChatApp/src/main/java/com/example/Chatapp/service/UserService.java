@@ -136,4 +136,17 @@ public class UserService {
         return "succefull";
     }
 
+    public void updatingInfo(UserDTO userDTO) {
+        User user = userRepo.getUserByUsername(userDTO.getUsername());
+
+        user.setDescription(userDTO.getDescription());
+        user.setFullname(userDTO.getFullname());
+        user.setUsername(userDTO.getUsername());
+        user.setEmail(userDTO.getEmail());
+        user.setUrlImage(userDTO.getUrlImage());
+
+        userRepo.save(user);
+
+
+    }
 }
